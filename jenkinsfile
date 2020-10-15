@@ -21,10 +21,6 @@ node {
         }
     }
     stage('Results') {
-        tools {
-            jdk "JDK8"
-        }
-
         junit '**/target/surefire-reports/TEST-*.xml'
     }
 }
