@@ -1,13 +1,18 @@
 node {
     def mvnHome
-    tools {
-        jdk "JDK8"
-    }
+
     stage('Preparation') { 
+        tools {
+            jdk "JDK8"
+        }
         git 'https://github.com/nirkoren/devopscon.git'
         mvnHome = tool 'M3'
     }
     stage('Build') {
+        tools {
+            jdk "JDK8"
+        }
+
         withEnv(["MVN_HOME=$mvnHome"]) {
             if (isUnix()) {
                 sh '"$MVN_HOME/bin/mvn" clean install -Pci'
@@ -17,6 +22,10 @@ node {
         }
     }
     stage('Results') {
+        tools {
+            jdk "JDK8"
+        }
+
         junit '**/target/surefire-reports/TEST-*.xml'
     }
 }
