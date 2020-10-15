@@ -1,17 +1,16 @@
 node {
     def mvnHome
 
+    node {
+        jdk = tool name: 'JDK8'
+        env.JAVA_HOME = "${jdk}"
+    }
+
     stage('Preparation') { 
-        tools {
-            jdk "JDK8"
-        }
         git 'https://github.com/nirkoren/devopscon.git'
         mvnHome = tool 'M3'
     }
     stage('Build') {
-        tools {
-            jdk "JDK8"
-        }
 
         withEnv(["MVN_HOME=$mvnHome"]) {
             if (isUnix()) {
