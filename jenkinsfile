@@ -1,5 +1,8 @@
 node {
     def mvnHome
+    tools {
+        jdk "JDK8"
+    }
     stage('Preparation') { 
         git 'https://github.com/nirkoren/devopscon.git'
         mvnHome = tool 'M3'
